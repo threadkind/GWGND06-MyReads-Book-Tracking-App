@@ -28,7 +28,6 @@ class ListBooks extends React.Component {
 		          </div>
 		          <div className="book-title">{book.title}</div>
 		          <div className="book-authors">{book.authors}</div>
-		          <div className="book-shelf">{book.shelf}</div>
 		        </div>
 		      </li>
 
