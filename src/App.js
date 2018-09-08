@@ -1,4 +1,6 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import ListBooks from './ListBooks'
 import './App.css'
@@ -6,13 +8,6 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false,
     books: []
   }
 
@@ -26,10 +21,49 @@ class BooksApp extends React.Component {
     console.log(this.state.books)
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
+
+      {/* M A I N    A P P    R E N D E R I N G */}
+        <Route exact path="/" render={() => (
+          <div className="list-books">
+            <div className="list-books-title">
+              <h1>MyReads</h1>
+            </div>
+
+            <div className="list-books-content">
+              <div>
+                <ListBooks
+                    books={this.state.books}
+                    shelf="currentlyReading"
+                    title="Currently Reading"
+                />
+                <ListBooks
+                    books={this.state.books}
+                    shelf="wantToRead"
+                    title="Want To Read"
+                />
+                <ListBooks
+                    books={this.state.books}
+                    shelf="read"
+                    title="Read"
+                />
+              </div>
+            </div>
+
+            <div className="open-search">
+              <Link to="/search">Add a book</Link>
+            </div>
+
+          </div>
+        )}
+      /> {/* End of main route*/}
+
+      {/* S E A R C H    P A G E    R E N D E R I N G */}
+
+        <Route path="/search" render={() => (
           <div className="search-books">
             <div className="search-books-bar">
-              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+              <Link to="/" className="close-search" >Close</Link>
+
               <div className="search-books-input-wrapper">
                 {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -40,68 +74,14 @@ class BooksApp extends React.Component {
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
                 <input type="text" placeholder="Search by title or author"/>
-
-              </div>
+              </div> {/* end of search books input wrapper*/}
             </div>
             <div className="search-books-results">
               <ol className="books-grid"></ol>
             </div>
           </div>
-        ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
+        )} /> {/* End of search route*/}
 
-
-            <div className="list-books-content">
-              <div>
-
-
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
-                  <div className="bookshelf-books">
-
-                    <ListBooks
-                        books={this.state.books}
-                        shelf="currentlyReading"
-                    />
-
-                  </div>
-                </div>
-
-
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Want to Read</h2>
-                  <div className="bookshelf-books">
-
-                    <ListBooks
-                        books={this.state.books}
-                        shelf="wantToRead"
-                    />
-
-                  </div>
-                </div>
-
-
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                  <div className="bookshelf-books">
-                    <ListBooks
-                        books={this.state.books}
-                        shelf="read"
-                    />
-                  </div>
-                </div>
-
-
-              </div>
-            </div>
-            <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-            </div>
-          </div>
-        )}
       </div>
     )
   }
