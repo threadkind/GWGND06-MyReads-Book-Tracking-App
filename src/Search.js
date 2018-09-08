@@ -1,7 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import escapeRegEx from 'escape-string-regexp'
-import sortBy from 'sort-by'
 import * as BooksAPI from './BooksAPI'
 
 class Search extends React.Component {
@@ -12,14 +10,16 @@ class Search extends React.Component {
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query.trim() })
+    this.setState({ query: query })
 
-    if (this.state.searchTerms.includes(query)){
+    const match = query.toLowerCase().split(' ').map( word => {
+      return word.charAt(0).toUpperCase() + word.substr(1)
+    }).join(" ")
+
+    if (this.state.searchTerms.includes(match)){
+
       BooksAPI.search(query).then((search) => this.setState({ search }) )
     }
-      console.log(this.state.query)
-      console.log(this.state.searchTerms.includes(query))
-      console.log(this.state.search)
 
   }
 
