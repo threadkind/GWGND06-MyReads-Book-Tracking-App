@@ -20,7 +20,10 @@ class Search extends React.Component {
 
       BooksAPI.search(query).then((search) => this.setState({ search }) )
     }
-
+{/*    else {
+      this.setState({search: ''})
+    }
+*/}
   }
 
 

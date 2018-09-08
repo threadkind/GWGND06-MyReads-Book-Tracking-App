@@ -1,7 +1,14 @@
 import React from 'react'
+import * as BooksAPI from './BooksAPI'
 
 
 class ListBooks extends React.Component {
+
+
+	handleChange(event) {
+		BooksAPI.update(event.target, event.target.value)
+	}
+
 	render() {
 	  let showBooks = this.props.books.filter((book) => book.shelf === this.props.shelf)
 
@@ -14,13 +21,16 @@ class ListBooks extends React.Component {
 			  	<ol className="books-grid">
 
 			  	  {showBooks.map( book =>
-
 			          <li key={book.id}>
 			            <div className="book">
 			              <div className="book-top">
 			                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
 				            <div className="book-shelf-changer">
-				              <select>
+				              <select
+				              	id={book.id}
+				                value={book.shelf}
+				                onChange={this.handleChange}
+				              >
 				                <option value="move" disabled>Move to...</option>
 				                <option value="currentlyReading">Currently Reading</option>
 				                <option value="wantToRead">Want to Read</option>
@@ -31,6 +41,7 @@ class ListBooks extends React.Component {
 				          </div>
 				          <div className="book-title">{book.title}</div>
 				          <div className="book-authors">{book.authors}</div>
+				          <div className="book-shelf">{book.shelf}</div>
 				        </div>
 				      </li>
 
