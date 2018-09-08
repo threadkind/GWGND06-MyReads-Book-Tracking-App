@@ -26,9 +26,20 @@ class BooksApp extends React.Component {
     console.log(this.state.books)
     return (
       <div className="app">
-            <ListBooks
+        <ListBooks
             books={this.state.books}
-      />
+            shelf="currentlyReading"
+        />
+
+        <ListBooks
+            books={this.state.books}
+            shelf="wantToRead"
+        />
+
+        <ListBooks
+            books={this.state.books}
+            shelf="read"
+        />
 
 
         {this.state.showSearchPage ? (
