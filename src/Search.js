@@ -10,7 +10,7 @@ class Search extends React.Component {
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query })
+    this.setState({ query })
 
     const match = query.toLowerCase().split(' ').map( word => {
       return word.charAt(0).toUpperCase() + word.substr(1)
@@ -42,6 +42,12 @@ class Search extends React.Component {
       })
     }
 
+    else {
+      this.setState({ search : [] })
+    }
+
+
+
   }
 
 
@@ -72,6 +78,7 @@ class Search extends React.Component {
         <div className="search-books-results">
           <ol className="books-grid">
 
+
           {this.state.search.map( book =>
 
                 <li key={book.id}>
@@ -94,7 +101,6 @@ class Search extends React.Component {
               </li>
 
             )}
-
 
           </ol>
         </div>
