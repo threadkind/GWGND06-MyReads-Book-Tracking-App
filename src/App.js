@@ -2,7 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
-import ListBooks from './ListBooks'
+import ShowBookshelf from './ShowBookshelf'
 import Search from './Search'
 import './App.css'
 
@@ -34,22 +34,24 @@ class BooksApp extends React.Component {
             <div className="list-books-content">
               <div>
 
-
-                <ListBooks
+                <ShowBookshelf
                     books={this.state.books}
                     shelf="currentlyReading"
                     title="Currently Reading"
                 />
-                <ListBooks
+
+                <ShowBookshelf
                     books={this.state.books}
                     shelf="wantToRead"
                     title="Want To Read"
                 />
-                <ListBooks
+
+                <ShowBookshelf
                     books={this.state.books}
                     shelf="read"
                     title="Read"
                 />
+
               </div>
             </div>
 
