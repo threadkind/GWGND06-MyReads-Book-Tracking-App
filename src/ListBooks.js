@@ -6,7 +6,9 @@ class ListBooks extends React.Component {
 
 
 	handleChange(event) {
+		console.log(event.target.value)
 		BooksAPI.update(event.target, event.target.value)
+
 	}
 
 	render() {
@@ -19,7 +21,6 @@ class ListBooks extends React.Component {
             <div className="bookshelf-books">
 
 			  	<ol className="books-grid">
-
 			  	  {showBooks.map( book =>
 			          <li key={book.id}>
 			            <div className="book">

@@ -18,12 +18,30 @@ class Search extends React.Component {
 
     if (this.state.searchTerms.includes(match)){
 
-      BooksAPI.search(query).then((search) => this.setState({ search }) )
+      BooksAPI.search(query)
+      .then((search) => {
+
+        let imageCheck = search.map(book => {
+          if(book.imageLinks === undefined){
+            book.imageLinks = {}
+            book.imageLinks.thumbnail = 'images/art-unavailable'
+            return book
+          }
+          else { return book }
+        })
+
+        let results = imageCheck.map(book => {
+          if(book.authors === undefined){
+            book.authors = ['Author Unknown']
+            return book
+          }
+          else { return book }
+        })
+
+        this.setState({ search : results })
+      })
     }
-{/*    else {
-      this.setState({search: ''})
-    }
-*/}
+
   }
 
 
