@@ -99,6 +99,11 @@ body, .app {
   font-size: 0;
 }
 
+.result-info {
+  position:relative;
+  top: 70px;
+}
+
 .search-books-results {
   padding: 80px 10px 20px;
 }

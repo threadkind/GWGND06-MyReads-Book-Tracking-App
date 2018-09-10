@@ -46,8 +46,6 @@ class Search extends React.Component {
       this.setState({ search : [] })
     }
 
-
-
   }
 
 
@@ -74,6 +72,12 @@ class Search extends React.Component {
             />
           </div> {/* end of search books input wrapper*/}
         </div>
+
+        {this.state.query.length > 0 &&
+          <div className="result-info">
+            Showing {this.state.search.length} results
+          </div>
+        }
 
         <div className="search-books-results">
           <ol className="books-grid">
