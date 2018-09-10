@@ -8,18 +8,20 @@ class ShowBook extends React.Component {
 	}
 
 	changeShelf = (event) => {
-		console.log(event.target.value)
-		this.setState({ shelf : 'wantToRead'})
 
 		BooksAPI.update(event.target, event.target.value)
-		.then((e) => console.log(e) )
+		.then((e) => {
+			this.props.handler(e)
 
-		console.log(`State is ${this.state.shelf}`)
+		})
+
+
 		}
 
 	render() {
-
+		console.log(this.state.shelf)
 	  return (
+
         <li key={this.props.id}>
 	        <div className="book">
 	          <div className="book-top">
@@ -27,7 +29,7 @@ class ShowBook extends React.Component {
 	            <div className="book-shelf-changer">
 	              <select
 	              	id={this.props.id}
-	                value={this.props.shelf}
+	                value={this.state.shelf}
 	                onChange={this.changeShelf}
 	              >
 	                <option value="move" disabled>Move to...</option>
