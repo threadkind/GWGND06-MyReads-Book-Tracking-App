@@ -10,7 +10,8 @@ class ShowBook extends React.Component {
 
 		BooksAPI.update(event.target, event.target.value)
 		.then((e) => {
-			this.props.handler(e)
+			this.props.handler()
+			console.log('book handled')
 		})
 	}
 

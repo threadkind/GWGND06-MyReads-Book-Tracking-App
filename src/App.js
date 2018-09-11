@@ -26,14 +26,15 @@ class BooksApp extends React.Component {
         wantToRead : wantToRead,
         read: read
       })
-
+      console.log(this.state)
       }
     )
 
   }
 
-  handler(e) {
+  handler() {
     this.filterBooks()
+    console.log('app handled')
   }
 
 
@@ -54,7 +55,7 @@ class BooksApp extends React.Component {
 
             <div className="list-books-content">
               <div>
-          }
+
 
 
       <div className="bookshelf">
@@ -144,6 +145,7 @@ class BooksApp extends React.Component {
             currentlyReading={this.state.currentlyReading}
             wantToRead={this.state.wantToRead}
             read={this.state.read}
+            refreshBookshelves={(this.handler).bind(this)}
           />
         )} /> {/* End of search route*/}
 
