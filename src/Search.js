@@ -10,12 +10,27 @@ class Search extends React.Component {
     searchTerms: ['Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus', 'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production', 'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling', 'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming', 'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual Reality', 'Web Development', 'iOS']
   }
   handler(e) {
-    console.log(this.id)
 
-    console.log(e)
+    let bookDetails;
 
+    BooksAPI.getAll().then( book => {
 
-    alert('Updated')
+      bookDetails = (book.filter(book =>
+        {return book.id === this.id}
+        )
+    )
+      let bookInDom = document.querySelector(`#${this.id}`)
+        console.log(bookInDom)
+        bookInDom.value = bookDetails[0].shelf
+    })
+
+    let bookCover = document.querySelector(`#book-${this.id} .book-cover`)
+
+      bookCover.style.border = '5px solid green'
+      setTimeout(function(){
+        bookCover.style.border = 'none'
+
+      }, 1000)
   }
 
   updateQuery = (query) => {
@@ -57,10 +72,7 @@ class Search extends React.Component {
             }
           }
         }
-        console.log(booksOnShelf)
-        console.log(shelfCheck)
-        console.log(authorCheck)
-        this.setState({ search : authorCheck.concat(shelfCheck) })
+        this.setState({ search : shelfCheck.concat(authorCheck) })
       })
     }
 
@@ -108,7 +120,7 @@ class Search extends React.Component {
           {this.state.search.map( (book, index) =>
 
               <ShowBook
-                key={index}
+                key={book.id}
                 id={book.id}
                 thumbnail={book.imageLinks.thumbnail}
                 shelf={book.shelf}

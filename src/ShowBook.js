@@ -3,7 +3,7 @@ import * as BooksAPI from './BooksAPI'
 
 class ShowBook extends React.Component {
 	state = {
-		shelf : this.props.shelf
+		shelf : this.props.shelf || 'none'
 	}
 
 	changeShelf = (event) => {
@@ -18,7 +18,7 @@ class ShowBook extends React.Component {
 	  return (
 
         <li key={this.props.id}>
-	        <div className="book">
+	        <div className="book" id={`book-${this.props.id}`}>
 	          <div className="book-top">
 	            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.thumbnail})` }}></div>
 	            <div className="book-shelf-changer">
@@ -37,7 +37,6 @@ class ShowBook extends React.Component {
 	          </div>
 	          <div className="book-title">{this.props.title}</div>
 	          <div className="book-authors">{this.props.authors}</div>
-	          <div className="book-shelf">{this.state.shelf}</div>
 	        </div>
 	      </li>
 

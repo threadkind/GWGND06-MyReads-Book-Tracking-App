@@ -64,7 +64,7 @@ class BooksApp extends React.Component {
           <ol className="books-grid">
             {this.state.currentlyReading.map( (book, index) =>
               <ShowBook
-                key={index}
+                key={book.id}
                 id={book.id}
                 thumbnail={book.imageLinks.thumbnail}
                 shelf={book.shelf}
@@ -141,7 +141,6 @@ class BooksApp extends React.Component {
 
         <Route path="/search" render={() => (
           <Search
-            filterBooks={this.filterBooks.bind(this)}
             currentlyReading={this.state.currentlyReading}
             wantToRead={this.state.wantToRead}
             read={this.state.read}
