@@ -70,10 +70,11 @@ class BooksApp extends React.Component {
                 thumbnail={book.imageLinks.thumbnail}
                 shelf={book.shelf}
                 title={book.title}
-                author={book.author}
+                authors={book.authors}
                 handler={(this.handler).bind(this)}
               />
         )}
+
           </ol>
       </div>
     </div>
@@ -92,7 +93,7 @@ class BooksApp extends React.Component {
                 thumbnail={book.imageLinks.thumbnail}
                 shelf={book.shelf}
                 title={book.title}
-                author={book.author}
+                authors={book.authors}
                 handler={(this.handler).bind(this)}
               />
         )}
@@ -114,7 +115,7 @@ class BooksApp extends React.Component {
                 thumbnail={book.imageLinks.thumbnail}
                 shelf={book.shelf}
                 title={book.title}
-                author={book.author}
+                authors={book.authors}
                 handler={(this.handler).bind(this)}
               />
         )}
