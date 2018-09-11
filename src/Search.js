@@ -20,13 +20,17 @@ class Search extends React.Component {
         )
     )
       let bookInDom = document.querySelector(`#${this.id}`)
-        console.log(bookInDom)
-        bookInDom.value = bookDetails[0].shelf
+        if(bookDetails[0]){
+          bookInDom.value = bookDetails[0].shelf
+        }
+        else {
+          bookInDom.value = 'none'
+        }
     })
 
     let bookCover = document.querySelector(`#book-${this.id} .book-cover`)
 
-      bookCover.style.border = '5px solid green'
+      bookCover.style.border = '2px solid green'
       setTimeout(function(){
         bookCover.style.border = 'none'
 
