@@ -1,12 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
+import ShowBook from './ShowBook'
 
 class Search extends React.Component {
   state = {
     query: '',
     search: [],
     searchTerms: ['Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus', 'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production', 'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling', 'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming', 'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual Reality', 'Web Development', 'iOS']
+  }
+  handler(e) {
+    console.log(this.id)
+
+    console.log(e)
+
+
+    alert('Updated')
   }
 
   updateQuery = (query) => {
@@ -17,7 +26,6 @@ class Search extends React.Component {
     }).join(" ")
 
     if (this.state.searchTerms.includes(match)){
-
       BooksAPI.search(query)
       .then((search) => {
 
@@ -29,8 +37,7 @@ class Search extends React.Component {
           }
           else { return book }
         })
-
-        let results = imageCheck.map(book => {
+        let authorCheck = imageCheck.map(book => {
           if(book.authors === undefined){
             book.authors = ['Author Unknown']
             return book
@@ -38,7 +45,22 @@ class Search extends React.Component {
           else { return book }
         })
 
-        this.setState({ search : results })
+        const booksOnShelf = this.props.currentlyReading.concat(this.props.wantToRead).concat(this.props.read)
+        let shelfCheck = []
+
+        for (let i = 0; i < authorCheck.length; i++){
+          for (let j = 0; j < booksOnShelf.length; j++){
+            if(authorCheck[i].id === booksOnShelf[j].id ){
+              shelfCheck.push(booksOnShelf[j])
+
+              authorCheck.splice(authorCheck.indexOf(authorCheck[i]), 1)
+            }
+          }
+        }
+        console.log(booksOnShelf)
+        console.log(shelfCheck)
+        console.log(authorCheck)
+        this.setState({ search : authorCheck.concat(shelfCheck) })
       })
     }
 
@@ -83,26 +105,17 @@ class Search extends React.Component {
           <ol className="books-grid">
 
 
-          {this.state.search.map( book =>
+          {this.state.search.map( (book, index) =>
 
-                <li key={book.id}>
-                  <div className="book">
-                    <div className="book-top">
-                      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
-                    <div className="book-shelf-changer">
-                      <select>
-                        <option value="move" disabled>Move to...</option>
-                        <option value="currentlyReading">Currently Reading</option>
-                        <option value="wantToRead">Want to Read</option>
-                        <option value="read">Read</option>
-                        <option value="none">None</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="book-title">{book.title}</div>
-                  <div className="book-authors">{book.authors}</div>
-                </div>
-              </li>
+              <ShowBook
+                key={index}
+                id={book.id}
+                thumbnail={book.imageLinks.thumbnail}
+                shelf={book.shelf}
+                title={book.title}
+                author={book.author}
+                handler={(this.handler)}
+              />
 
             )}
 

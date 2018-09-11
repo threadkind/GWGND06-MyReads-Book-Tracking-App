@@ -11,14 +11,10 @@ class ShowBook extends React.Component {
 		BooksAPI.update(event.target, event.target.value)
 		.then((e) => {
 			this.props.handler(e)
-
 		})
 	}
 
-
-
 	render() {
-		console.log(this.state.shelf)
 	  return (
 
         <li key={this.props.id}>
@@ -45,14 +41,8 @@ class ShowBook extends React.Component {
 	        </div>
 	      </li>
 
-
-
 	  	)
-
-
 	}
-
-
 }
 
 export default ShowBook

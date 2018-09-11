@@ -9,7 +9,6 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    books : [],
     currentlyReading : [],
     wantToRead : [],
     read : []
@@ -23,7 +22,6 @@ class BooksApp extends React.Component {
       let read = books.filter(book => book.shelf === 'read')
 
       this.setState({
-        books : books,
         currentlyReading : currentlyReading,
         wantToRead : wantToRead,
         read: read
@@ -56,6 +54,7 @@ class BooksApp extends React.Component {
 
             <div className="list-books-content">
               <div>
+          }
 
 
       <div className="bookshelf">
@@ -80,7 +79,7 @@ class BooksApp extends React.Component {
 
 
 
-          <div className="bookshelf">
+        <div className="bookshelf">
           <h2 className="bookshelf-title">Want To Read</h2>
             <div className="bookshelf-books">
 
@@ -129,7 +128,9 @@ class BooksApp extends React.Component {
             </div>
 
             <div className="open-search">
-              <Link to="/search">Add a book</Link>
+              <Link
+                to="/search"
+              >Add a book</Link>
             </div>
 
           </div>
@@ -140,6 +141,10 @@ class BooksApp extends React.Component {
 
         <Route path="/search" render={() => (
           <Search
+            filterBooks={this.filterBooks.bind(this)}
+            currentlyReading={this.state.currentlyReading}
+            wantToRead={this.state.wantToRead}
+            read={this.state.read}
           />
         )} /> {/* End of search route*/}
 
