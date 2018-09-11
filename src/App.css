@@ -64,6 +64,16 @@ body, .app {
 
 /* search page */
 
+#updateMessage {
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+  text-align: center;
+  background: yellow;
+  top: 50px;
+  display: none;
+}
+
 .search-books-bar {
   position: fixed;
   width: 100%;

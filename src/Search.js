@@ -28,11 +28,11 @@ class Search extends React.Component {
         }
     })
 
-    let bookCover = document.querySelector(`#book-${this.id} .book-cover`)
+    let message = document.querySelector('#updateMessage')
 
-      bookCover.style.border = '2px solid green'
+      message.style.display = 'block'
       setTimeout(function(){
-        bookCover.style.border = 'none'
+        message.style.display = 'none'
 
       }, 1000)
 

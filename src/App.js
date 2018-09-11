@@ -141,12 +141,15 @@ class BooksApp extends React.Component {
       {/* S E A R C H    P A G E    R E N D E R I N G */}
 
         <Route path="/search" render={() => (
+          <div>
+          <div id="updateMessage">Book has been updated</div>
           <Search
             currentlyReading={this.state.currentlyReading}
             wantToRead={this.state.wantToRead}
             read={this.state.read}
             refreshBookshelves={(this.handler).bind(this)}
           />
+          </div>
         )} /> {/* End of search route*/}
 
       </div>
