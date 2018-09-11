@@ -15,46 +15,7 @@ class BooksApp extends React.Component {
     read : []
   }
 
-  handler(e) {
-
-    let currentlyReading = []
-    let wantToRead = []
-    let read = []
-
-    for(let i = 0; i < this.state.books.length; i++){
-      for(let j = 0; j < e.currentlyReading.length; j ++){
-        if(this.state.books[i].id === e.currentlyReading[j]){
-          currentlyReading.push(this.state.books[i])
-        }
-      }
-    }
-
-
-    for(let i = 0; i < this.state.books.length; i++){
-      for(let j = 0; j < e.wantToRead.length; j ++){
-        if(this.state.books[i].id === e.wantToRead[j]){
-          wantToRead.push(this.state.books[i])
-        }
-      }
-    }
-
-    for(let i = 0; i < this.state.books.length; i++){
-      for(let j = 0; j < e.read.length; j ++){
-        if(this.state.books[i].id === e.read[j]){
-          read.push(this.state.books[i])
-        }
-      }
-    }
-
-    this.setState({
-      currentlyReading : currentlyReading,
-      wantToRead : wantToRead,
-      read : read
-    })
-  }
-
-
-  componentDidMount() {
+  filterBooks() {
     BooksAPI.getAll()
       .then((books) =>   {
       let currentlyReading = books.filter(book => book.shelf === 'currentlyReading')
@@ -70,6 +31,16 @@ class BooksApp extends React.Component {
 
       }
     )
+
+  }
+
+  handler(e) {
+    this.filterBooks()
+  }
+
+
+  componentDidMount() {
+    this.filterBooks()
   }
 
   render() {

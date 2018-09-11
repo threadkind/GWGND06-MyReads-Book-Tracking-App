@@ -4,7 +4,6 @@ import * as BooksAPI from './BooksAPI'
 class ShowBook extends React.Component {
 	state = {
 		shelf : this.props.shelf
-
 	}
 
 	changeShelf = (event) => {
@@ -14,9 +13,9 @@ class ShowBook extends React.Component {
 			this.props.handler(e)
 
 		})
+	}
 
 
-		}
 
 	render() {
 		console.log(this.state.shelf)
