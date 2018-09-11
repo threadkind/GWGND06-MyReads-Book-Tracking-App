@@ -68,6 +68,9 @@ class Search extends React.Component {
         const booksOnShelf = this.props.currentlyReading.concat(this.props.wantToRead).concat(this.props.read)
         let shelfCheck = []
 
+        console.log(authorCheck)
+        console.log(booksOnShelf)
+
         for (let i = 0; i < authorCheck.length; i++){
           for (let j = 0; j < booksOnShelf.length; j++){
             if(authorCheck[i].id === booksOnShelf[j].id ){
@@ -77,6 +80,7 @@ class Search extends React.Component {
             }
           }
         }
+
         this.setState({ search : shelfCheck.concat(authorCheck) })
       })
     }
