@@ -307,6 +307,19 @@ body, .app {
 .book {
   width: 140px;
 }
+.book-rating {
+  padding-right: 10px;
+  text-align: center;
+  font-size: 1.2em;
+  color: var(--accent-color2);
+}
+.half {
+  color: var(--accent-color);
+}
+.nER {
+  color: var(--main-color);
+  font-size: 0.6em;
+}
 .book-title,
 .book-authors {
   font-size: 0.8em;

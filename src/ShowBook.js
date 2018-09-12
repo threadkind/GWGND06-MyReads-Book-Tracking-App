@@ -3,7 +3,8 @@ import * as BooksAPI from './BooksAPI'
 
 class ShowBook extends React.Component {
 	state = {
-		shelf : this.props.shelf || 'none'
+		shelf : this.props.shelf || 'none',
+		rating : ''
 	}
 
 	changeShelf = (event) => {
@@ -13,6 +14,32 @@ class ShowBook extends React.Component {
 			this.props.handler()
 			console.log('book handled')
 		})
+	}
+
+	componentDidMount() {
+		let rating;
+		let star = '★'
+
+		function setStars(bookRating){
+			rating = star
+
+			for(let i = 1; i < bookRating; i++){
+				rating += star
+			}
+		}
+
+		if(this.props.rating === undefined){
+			rating = '<span class="nER">Not Enough Ratings</span>'
+		}
+		else if (Number.isInteger(this.props.rating)) {
+			setStars(this.props.rating)
+		}
+		else {
+			let tempRating = Math.floor(this.props.rating)
+			setStars(tempRating)
+			rating += '<span class="half">½</span>'
+		}
+		this.setState({ rating })
 	}
 
 	render() {
@@ -37,7 +64,8 @@ class ShowBook extends React.Component {
 	              </select>
 	            </div>
 	          </div>
-	          <div className="book-rating">{this.props.rating}</div>
+	          <div className="book-rating"
+	          	   dangerouslySetInnerHTML={{__html: this.state.rating}}></div>
 	          <div className="book-title">{this.props.title}</div>
 	          <div className="book-authors">
 	          	<ol className="authors-list">

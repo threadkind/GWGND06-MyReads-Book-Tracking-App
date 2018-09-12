@@ -5,7 +5,7 @@ class Menu extends React.Component {
 
 	menuClick = () => {
 
- 		 document.querySelector('.menu-icon-book-open').classList.toggle('book-closed');
+ 		document.querySelector('.menu-icon-book-open').classList.toggle('book-closed');
 
   		let menuItems = document.querySelectorAll('.menu-li')
 
@@ -14,8 +14,6 @@ class Menu extends React.Component {
 		  }
 
 		  document.querySelector('.menu-ul').classList.toggle('menu-closed')
-
-
 
 	}
 
