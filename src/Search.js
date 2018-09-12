@@ -141,6 +141,7 @@ class Search extends React.Component {
                 shelf={book.shelf}
                 title={book.title}
                 authors={book.authors}
+                rating={book.averageRating}
                 handler={(this.handler)}
               />
 

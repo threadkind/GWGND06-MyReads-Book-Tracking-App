@@ -37,6 +37,7 @@ class ShowBook extends React.Component {
 	              </select>
 	            </div>
 	          </div>
+	          <div className="book-rating">{this.props.rating}</div>
 	          <div className="book-title">{this.props.title}</div>
 	          <div className="book-authors">
 	          	<ol className="authors-list">
