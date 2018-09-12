@@ -2,6 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
+import Menu from './Menu'
 import ShowBook from './ShowBook'
 import Search from './Search'
 import './App.css'
@@ -48,6 +49,9 @@ class BooksApp extends React.Component {
 
       {/* M A I N    A P P    R E N D E R I N G */}
         <Route exact path="/" render={() => (
+          <div>
+          <Menu />
+
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
@@ -136,6 +140,7 @@ class BooksApp extends React.Component {
             </div>
 
           </div>
+        </div>
         )}
       /> {/* End of main route*/}
 

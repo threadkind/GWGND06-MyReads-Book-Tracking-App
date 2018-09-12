@@ -2,10 +2,15 @@
 
 :root {
   --main-color: #b2a380;
-  --pageBackground: #FFF;
+  --background: #FFF;
   --accent-color: #000;
+  --accent-color2: green;
 }
 
+* {
+  text-decoration: none;
+  list-style: none;
+}
 
 html, body, .root {
   height: 100%;
@@ -17,10 +22,149 @@ body, .app {
   background: white;
 }
 
+/* menu */
+
+#menu-button,  #menu-button-overlay{
+  border-radius: 50%;
+  height: 75px;
+  width: 75px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+#menu-button {
+  background: var(--background);
+}
+#menu-button-overlay {
+  z-index: 100;
+  cursor: pointer;
+}
+.menu-icon-title {
+  font-size: 15px;
+  font-family: sans-serif;
+  transform: rotate(-90deg);
+  position: fixed;
+  right: 38px;
+  top: 38px;
+}
+.menu-icon-spine {
+  position: fixed;
+  top: 24px;
+  right: 47px;
+  width: 5px;
+  background: var(--main-color);
+  height: 46px;
+}
+
+
+.menu-icon-back {
+  position: fixed;
+  right: 20px;
+  top: 24px;
+  border-radius: 4px;
+  border-top: 3px solid var(--accent-color);
+  border-right: 3px solid var(--accent-color);
+  border-bottom: 3px solid var(--accent-color);
+  background: var(--accent-color2);
+  font-size: 10px;
+  height: 40px;
+  width: 25px;
+}
+.menu-icon-front-cover-front {
+  position: fixed;
+  right: 20px;
+  top: 24px;
+  color: var(--accent-color2);
+  border-top: 3px solid var(--main-color);
+  border-right: 3px solid var(--main-color);
+  border-bottom: 3px solid var(--main-color);
+  background: var(--main-color);
+  font-size: 10px;
+  height: 40px;
+  width: 25px;
+  border-radius: 4px;
+  backface-visibility: hidden;
+  z-index: 2;
+  transform: rotateY(180deg);
+}
+.menu-icon-front-cover-back {
+  position: fixed;
+  right: 20px;
+  top: 24px;
+  border-radius: 4px;
+  border-top: 3px solid var(--accent-color);
+  border-left: 3px solid var(--accent-color);
+  border-bottom: 3px solid var(--accent-color);
+  background: var(--accent-color2);
+  font-size: 10px;
+  height: 40px;
+  width: 25px;
+  backface-visibility: hidden;
+  transform: rotateY(0deg);
+}
+.menu-icon-book-open-container {
+  position: fixed;
+  top: 25px;
+  right: 48px;
+  height: 40px;
+  width: 25px;
+}
+.menu-icon-book-open {
+  position: fixed;
+  top: 0;
+  right: 26px;
+  perspective: 1000px;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+}
+
+.book-closed {
+  transform: rotateY(180deg);
+  right: 68px;
+}
+
+.menu-ul {
+  position: fixed;
+  top: 58px;
+  right: 25px;
+  width: 25%;
+  background: var(--background);
+  padding: 5% 1% 1%;
+  border-radius: 2px;
+  overflow:hidden;
+  height:auto;
+  max-height:600px;
+  transition:max-height 0.3s ease,padding 0.3s ease;
+
+}
+.menu-li {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 20px;
+  padding: 2px;
+  overflow:hidden;
+  height:auto;
+  max-height:600px;
+  transition:max-height 0.3s ease;
+
+}
+.menu-li:hover {
+  font-weight: bold;
+}
+.menu-a {
+  color: var(--accent-color);
+}
+.menu-closed {
+  max-height:0;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
 /* main page */
 
 .list-books-title {
   padding: 10px 0;
+  font-family: 'Montserrat', sans-serif;
   background: var(--accent-color);
   text-align: center;
 }
@@ -78,7 +222,7 @@ body, .app {
   width: 100%;
   z-index: 100;
   text-align: center;
-  color: var(--pageBackground);
+  color: var(--background);
   background: var(--main-color);
   top: 50px;
   display: none;
@@ -112,7 +256,7 @@ body, .app {
   left: 15px;
   width: 50px;
   height: 53px;
-  background: var(--pageBackground);
+  background: var(--background);
   background-image: url('./icons/arrow-back.svg');
   background-position: center;
   background-repeat: no-repeat;
@@ -193,7 +337,7 @@ body, .app {
 
 .book-cover {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  background: var(--pageBackground);
+  background: var(--background);
 }
 .book-cover-title {
   padding: 20px 10px 0;
