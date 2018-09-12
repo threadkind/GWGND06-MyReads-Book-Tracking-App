@@ -68,9 +68,6 @@ class Search extends React.Component {
         const booksOnShelf = this.props.currentlyReading.concat(this.props.wantToRead).concat(this.props.read)
         let shelfCheck = []
 
-        console.log(authorCheck.map(book => book.id))
-        console.log(booksOnShelf.map(book => book.id))
-
         for (let i = 0; i < authorCheck.length; i++){
           for (let j = 0; j < booksOnShelf.length; j++){
             if(authorCheck[i] !== undefined && booksOnShelf[j] !== undefined && authorCheck[i].id === booksOnShelf[j].id ){
@@ -143,6 +140,8 @@ class Search extends React.Component {
                 authors={book.authors}
                 rating={book.averageRating}
                 shelfHandler={(this.shelfHandler)}
+                descriptionHandler={( this.descriptionHandler)}
+
               />
 
             )}

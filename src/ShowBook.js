@@ -5,7 +5,13 @@ import * as BooksAPI from './BooksAPI'
 class ShowBook extends React.Component {
 	state = {
 		shelf : this.props.shelf || 'none',
-		rating : ''
+		rating : '',
+		description : this.props.description
+	}
+
+	handleBookClick = (e) => {
+			console.log(this.state)
+			console.log(this.props)
 	}
 
 	changeShelf = (event) => {
@@ -49,7 +55,11 @@ class ShowBook extends React.Component {
         <li key={this.props.id}>
 	        <div className="book" id={`book-${this.props.id}`}>
 	          <div className="book-top">
-	            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.thumbnail})` }}></div>
+	            <div className="book-cover"
+	            	 id={`cover-${this.props.id}`}
+	                 style={{ width: 128, height: 193, backgroundImage: `url(${this.props.thumbnail})`}}
+	                 onClick={this.handleBookClick}>
+	            </div>
 	            <div className="book-shelf-changer">
 	              <select
 	              	id={this.props.id}

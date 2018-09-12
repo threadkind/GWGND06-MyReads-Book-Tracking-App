@@ -12,7 +12,8 @@ class BooksApp extends React.Component {
   state = {
     currentlyReading : [],
     wantToRead : [],
-    read : []
+    read : [],
+    menuStatus : 'closed',
   }
 
   filterBooks() {
@@ -26,7 +27,6 @@ class BooksApp extends React.Component {
         currentlyReading : currentlyReading,
         wantToRead : wantToRead,
         read : read,
-        menuStatus : 'closed'
       })
       console.log(this.state)
       }
@@ -36,6 +36,33 @@ class BooksApp extends React.Component {
 
   shelfHandler() {
     this.filterBooks()
+  }
+
+  descriptionHandler = (e) => {
+    if(e.target.className === 'book-cover'){
+        document.querySelector('.book-description-container').style.display = 'flex'
+
+      let id = e.target.id.slice(6)
+
+      BooksAPI.get(id)
+        .then(results =>
+
+        document.querySelector('.book-description-text').innerText = results.description
+        )
+
+
+          console.log('Main app handled')
+
+    }
+
+
+
+      }
+
+
+  descriptionClose = () => {
+    document.querySelector('.book-description-container').style.display = 'none'
+    document.querySelector('.book-description-text').innerText = ""
   }
 
   menuClick = () => {
@@ -64,24 +91,14 @@ class BooksApp extends React.Component {
   componentDidMount() {
     this.filterBooks()
 
-    document.querySelector('.book-description-close').addEventListener('click', function(){
 
 
-      document.querySelector('.book-description-container').style.display = 'none'
-
-    })
-
-    document.querySelector('.app').addEventListener('click', function(e){
-      if(e.target.className === 'book-cover'){
-        document.querySelector('.book-description-container').style.display = 'flex'
-      }
-      console.log(e)
-    })
   }
 
   render() {
     return (
-      <div className="app">
+      <div className="app"
+          onClick={this.descriptionHandler}>
         <Menu
           menuClick={this.menuClick.bind(this)}
           />
@@ -90,7 +107,9 @@ class BooksApp extends React.Component {
         </div>
         <div className="book-description-container">
           <div className="book-description">
-            <div className="book-description-close">x</div>
+            <div className="book-description-close"
+             onClick={this.descriptionClose}>x</div>
+            <div className="book-description-text">Loading...</div>
           </div>
         </div>
 
@@ -119,8 +138,8 @@ class BooksApp extends React.Component {
                 title={book.title}
                 authors={book.authors}
                 rating={book.averageRating}
-                description={book.description}
                 shelfHandler={(this.shelfHandler).bind(this)}
+                descriptionHandler={( this.descriptionHandler)}
               />
         )}
 
@@ -144,8 +163,9 @@ class BooksApp extends React.Component {
                 title={book.title}
                 authors={book.authors}
                 rating={book.averageRating}
-                description={book.description}
                 shelfHandler={(this.shelfHandler).bind(this)}
+                descriptionHandler={( this.descriptionHandler)}
+
               />
         )}
           </ol>
@@ -168,8 +188,9 @@ class BooksApp extends React.Component {
                 title={book.title}
                 authors={book.authors}
                 rating={book.averageRating}
-                description={book.description}
                 shelfHandler={(this.shelfHandler).bind(this)}
+                descriptionHandler={( this.descriptionHandler)}
+
               />
         )}
           </ol>
@@ -214,8 +235,9 @@ class BooksApp extends React.Component {
                           title={book.title}
                           authors={book.authors}
                           rating={book.averageRating}
-                          description={book.description}
                           shelfHandler={(this.shelfHandler).bind(this)}
+                          descriptionHandler={( this.descriptionHandler)}
+
                         />
                       )}
                     </ol>
@@ -250,7 +272,6 @@ class BooksApp extends React.Component {
                           title={book.title}
                           authors={book.authors}
                           rating={book.averageRating}
-                          description={book.description}
                           shelfHandler={(this.shelfHandler).bind(this)}
                         />
                       )}
@@ -286,7 +307,6 @@ class BooksApp extends React.Component {
                           title={book.title}
                           authors={book.authors}
                           rating={book.averageRating}
-                          description={book.description}
                           shelfHandler={(this.shelfHandler).bind(this)}
                         />
                       )}
