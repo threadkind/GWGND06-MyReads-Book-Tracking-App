@@ -3,20 +3,6 @@ import { Link } from 'react-router-dom'
 
 class Menu extends React.Component {
 
-	menuClick = () => {
-
- 		document.querySelector('.menu-icon-book-open').classList.toggle('book-closed');
-
-  		let menuItems = document.querySelectorAll('.menu-li')
-
-		  for(let i = 0; i < menuItems.length; i++){
-		    menuItems[i].classList.toggle('menu-closed');
-		  }
-
-		  document.querySelector('.menu-ul').classList.toggle('menu-closed')
-
-	}
-
 	render(){
 
 		return(
@@ -31,7 +17,7 @@ class Menu extends React.Component {
 			    </div>
 			  </div>
 			</div>
-			<div id="menu-button-overlay" onClick={this.menuClick}></div>
+			<div id="menu-button-overlay" onClick={this.props.menuClick}></div>
 			<ul className="menu-ul menu-closed">
 			  <li className="menu-li menu-closed">
 			    <Link to="/"

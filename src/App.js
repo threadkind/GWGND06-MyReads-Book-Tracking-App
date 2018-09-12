@@ -25,7 +25,8 @@ class BooksApp extends React.Component {
       this.setState({
         currentlyReading : currentlyReading,
         wantToRead : wantToRead,
-        read: read
+        read : read,
+        menuStatus : 'closed'
       })
       console.log(this.state)
       }
@@ -38,7 +39,29 @@ class BooksApp extends React.Component {
     console.log('app handled')
   }
 
+  menuClick = () => {
+      document.querySelector('.menu-icon-book-open').classList.toggle('book-closed');
 
+      let menuItems = document.querySelectorAll('.menu-li')
+
+      for(let i = 0; i < menuItems.length; i++){
+        menuItems[i].classList.toggle('menu-closed');
+      }
+
+      document.querySelector('.menu-ul').classList.toggle('menu-closed')
+          if(this.state.menuStatus === 'closed'){
+            this.setState({ menuStatus : 'open' })
+          }
+          else {
+            this.setState({ menuStatus : 'closed' })
+          }
+    }
+
+    searchMenuCheck = () => {
+      if(this.state.menuStatus === 'open'){
+        this.menuClick()
+      }
+    }
   componentDidMount() {
     this.filterBooks()
   }
@@ -46,7 +69,9 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <Menu />
+        <Menu
+          menuClick={this.menuClick.bind(this)}
+          />
         <div className="list-books-title">
           <h1>MyReads</h1>
         </div>
@@ -140,6 +165,7 @@ class BooksApp extends React.Component {
             <div className="open-search">
               <Link
                 to="/search"
+                onClick={this.searchMenuCheck}
               >Add a book</Link>
             </div>
 
