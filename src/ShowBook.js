@@ -43,7 +43,6 @@ class ShowBook extends React.Component {
 	}
 
 	render() {
-		console.log(this.props)
 	  return (
 
         <li key={this.props.id}>
@@ -69,8 +68,8 @@ class ShowBook extends React.Component {
 	          <div className="book-title">{this.props.title}</div>
 	          <div className="book-authors">
 	          	<ol className="authors-list">
-	          		{this.props.authors.map(author =>
-	          			<li>{author}</li>
+	          		{this.props.authors.map((author, index) =>
+	          			<li key={index}>{author}</li>
 	          		)}
 	          	</ol>
 	          </div>
