@@ -86,7 +86,7 @@ class BooksApp extends React.Component {
           menuClick={this.menuClick.bind(this)}
           />
         <div className="list-books-title">
-          <h1>MyReads</h1>
+          <Link to="/"><h1>MyReads</h1></Link>
         </div>
         <div className="book-description-container">
           <div className="book-description">
@@ -194,7 +194,7 @@ class BooksApp extends React.Component {
         )}
       /> {/* End of main route*/}
 
-      {/* S E A R C H    P A G E    R E N D E R I N G */}
+      {/* C U R R E N T L Y    R E A D I N G    P A G E    R E N D E R I N G */}
 
         <Route exact path="/currently-reading" render={() => (
           <div>
