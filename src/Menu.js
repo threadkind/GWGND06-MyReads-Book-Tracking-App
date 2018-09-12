@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 class Menu extends React.Component {
 
@@ -17,6 +18,7 @@ class Menu extends React.Component {
 
 
 	}
+
 	render(){
 
 		return(
@@ -33,9 +35,34 @@ class Menu extends React.Component {
 			</div>
 			<div id="menu-button-overlay" onClick={this.menuClick}></div>
 			<ul className="menu-ul menu-closed">
-			  <li className="menu-li menu-closed"><a href="#" className="menu-a">Item 1</a></li>
-			  <li className="menu-li menu-closed"><a href="#" className="menu-a">Item 2</a></li>
-			  <li className="menu-li menu-closed"><a href="#" className="menu-a">Item 3</a></li>
+			  <li className="menu-li menu-closed">
+			    <Link to="/"
+			          className="menu-a"
+			          onClick={this.menuClick}
+			        >All Bookshelves
+			    </Link>
+			  </li>
+			  <li className="menu-li menu-closed">
+			    <Link to="/currently-reading"
+			          className="menu-a"
+			          onClick={this.menuClick}
+			        >Currently Reading
+			    </Link>
+			  </li>
+			  <li className="menu-li menu-closed">
+			    <Link to="/want-to-read"
+			          className="menu-a"
+			          onClick={this.menuClick}
+			        >Want To Read
+			    </Link>
+			  </li>
+			  <li className="menu-li menu-closed">
+			    <Link to="/read"
+			          className="menu-a"
+			          onClick={this.menuClick}
+			      >Read
+			    </Link>
+			  </li>
 			</ul>
 		  </div>
 		)

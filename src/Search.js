@@ -28,9 +28,9 @@ class Search extends React.Component {
         }
     })
 
-    let message = document.querySelector('#updateMessage')
+    let message = document.querySelector('.message-container')
 
-      message.style.display = 'block'
+      message.style.display = 'flex'
       setTimeout(function(){
         message.style.display = 'none'
 
@@ -91,6 +91,9 @@ class Search extends React.Component {
 
   }
 
+  scrollToTop = (e) => {
+    console.log(e)
+  }
 
   render() {
 
@@ -122,7 +125,7 @@ class Search extends React.Component {
         {this.state.query.length > 0 &&
           <div className="result-info">
             Showing {this.state.search.length} results
-          </div>
+            </div>
         }
 
         <div className="search-books-results">

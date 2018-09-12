@@ -46,16 +46,17 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
+        <Menu />
+        <div className="list-books-title">
+          <h1>MyReads</h1>
+        </div>
 
       {/* M A I N    A P P    R E N D E R I N G */}
         <Route exact path="/" render={() => (
           <div>
-          <Menu />
 
           <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
+
 
             <div className="list-books-content">
               <div>
@@ -145,10 +146,116 @@ class BooksApp extends React.Component {
       /> {/* End of main route*/}
 
       {/* S E A R C H    P A G E    R E N D E R I N G */}
+      {/* C U R R E N T L Y    R E A D I N G    P A G E    R E N D E R I N G */}
+
+        <Route exact path="/currently-reading" render={() => (
+          <div>
+            <div className="list-books">
+              <div className="list-books-content">
+                <div className="bookshelf">
+                  <h2 className="bookshelf-title">Currently Reading</h2>
+                  <div className="bookshelf-books">
+
+                    <ol className="books-grid">
+                      {this.state.currentlyReading.map( (book, index) =>
+                        <ShowBook
+                          key={book.id}
+                          id={book.id}
+                          thumbnail={book.imageLinks.thumbnail}
+                          shelf={book.shelf}
+                          title={book.title}
+                          authors={book.authors}
+                          handler={(this.handler).bind(this)}
+                        />
+                      )}
+                    </ol>
+                  </div>
+                </div>
+              </div>
+              <div className="open-search">
+                <Link
+                  to="/search"
+                >Add a book</Link>
+              </div>
+            </div>
+          </div>
+        )} />
+
+      {/* W A N T   T O   R E A D    P A G E    R E N D E R I N G */}
+        <Route exact path="/want-to-read" render={() => (
+          <div>
+            <div className="list-books">
+              <div className="list-books-content">
+                <div className="bookshelf">
+                  <h2 className="bookshelf-title">Want To Read</h2>
+                  <div className="bookshelf-books">
+
+                    <ol className="books-grid">
+                      {this.state.wantToRead.map( (book, index) =>
+                        <ShowBook
+                          key={book.id}
+                          id={book.id}
+                          thumbnail={book.imageLinks.thumbnail}
+                          shelf={book.shelf}
+                          title={book.title}
+                          authors={book.authors}
+                          handler={(this.handler).bind(this)}
+                        />
+                      )}
+                    </ol>
+                  </div>
+                </div>
+              </div>
+              <div className="open-search">
+                <Link
+                  to="/search"
+                >Add a book</Link>
+              </div>
+            </div>
+          </div>
+        )} />
+
+      {/* R E A D    P A G E    R E N D E R I N G */}
+        <Route exact path="/read" render={() => (
+          <div>
+            <div className="list-books">
+              <div className="list-books-content">
+                <div className="bookshelf">
+                  <h2 className="bookshelf-title">Read</h2>
+                  <div className="bookshelf-books">
+
+                    <ol className="books-grid">
+                      {this.state.read.map( (book, index) =>
+                        <ShowBook
+                          key={book.id}
+                          id={book.id}
+                          thumbnail={book.imageLinks.thumbnail}
+                          shelf={book.shelf}
+                          title={book.title}
+                          authors={book.authors}
+                          handler={(this.handler).bind(this)}
+                        />
+                      )}
+                    </ol>
+                  </div>
+                </div>
+              </div>
+              <div className="open-search">
+                <Link
+                  to="/search"
+                >Add a book</Link>
+              </div>
+            </div>
+          </div>
+        )} />
+
+      {/* S E A R C H    P A G E    R E N D E R I N G */}
 
         <Route path="/search" render={() => (
           <div>
-          <div id="updateMessage">Book has been updated</div>
+          <div className="message-container">
+            <div id="updateMessage">Book has been updated</div>
+          </div>
           <Search
             currentlyReading={this.state.currentlyReading}
             wantToRead={this.state.wantToRead}

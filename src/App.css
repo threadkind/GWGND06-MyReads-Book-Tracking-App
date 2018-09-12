@@ -1,10 +1,9 @@
-/* Gold = #b2a380*/
 
 :root {
   --main-color: #b2a380;
   --background: #FFF;
   --accent-color: #000;
-  --accent-color2: green;
+  --accent-color2: gold;
 }
 
 * {
@@ -31,41 +30,38 @@ body, .app {
   position: fixed;
   top: 10px;
   right: 10px;
+  z-index: 10;
 }
 #menu-button {
-  background: var(--background);
+  background: var(--main-color);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+
 #menu-button-overlay {
   z-index: 100;
   cursor: pointer;
 }
 .menu-icon-title {
-  font-size: 15px;
-  font-family: sans-serif;
+  color: var(--background);
+  font-size: 12.5px;
+  line-height: 1;
+  font-family: 'Montserrat', sans-serif;
   transform: rotate(-90deg);
   position: fixed;
-  right: 38px;
+  right: 40px;
   top: 38px;
 }
-.menu-icon-spine {
-  position: fixed;
-  top: 24px;
-  right: 47px;
-  width: 5px;
-  background: var(--main-color);
-  height: 46px;
-}
-
 
 .menu-icon-back {
   position: fixed;
   right: 20px;
   top: 24px;
   border-radius: 4px;
-  border-top: 3px solid var(--accent-color);
-  border-right: 3px solid var(--accent-color);
-  border-bottom: 3px solid var(--accent-color);
-  background: var(--accent-color2);
+  border-top: 3px solid var(--accent-color2);
+  border-right: 3px solid var(--accent-color2);
+  border-bottom: 3px solid var(--accent-color2);
+  line-height: 1;
+  background: var(--background);
   font-size: 10px;
   height: 40px;
   width: 25px;
@@ -74,11 +70,12 @@ body, .app {
   position: fixed;
   right: 20px;
   top: 24px;
-  color: var(--accent-color2);
-  border-top: 3px solid var(--main-color);
-  border-right: 3px solid var(--main-color);
-  border-bottom: 3px solid var(--main-color);
-  background: var(--main-color);
+  line-height: 1;
+  color: var(--background);
+  border-top: 3px solid var(--accent-color2);
+  border-right: 3px solid var(--accent-color2);
+  border-bottom: 3px solid var(--accent-color2);
+  background: var(--accent-color2);
   font-size: 10px;
   height: 40px;
   width: 25px;
@@ -91,11 +88,12 @@ body, .app {
   position: fixed;
   right: 20px;
   top: 24px;
+  line-height: 1;
   border-radius: 4px;
-  border-top: 3px solid var(--accent-color);
-  border-left: 3px solid var(--accent-color);
-  border-bottom: 3px solid var(--accent-color);
-  background: var(--accent-color2);
+  border-top: 3px solid var(--accent-color2);
+  border-left: 3px solid var(--accent-color2);
+  border-bottom: 3px solid var(--accent-color2);
+  background: var(--background);
   font-size: 10px;
   height: 40px;
   width: 25px;
@@ -124,12 +122,13 @@ body, .app {
 }
 
 .menu-ul {
+  z-index: 10;
   position: fixed;
   top: 58px;
   right: 25px;
-  width: 25%;
-  background: var(--background);
-  padding: 5% 1% 1%;
+  width: 33vw;
+  background: var(--main-color);
+  padding: 1% 1% 1%;
   border-radius: 2px;
   overflow:hidden;
   height:auto;
@@ -146,13 +145,14 @@ body, .app {
   height:auto;
   max-height:600px;
   transition:max-height 0.3s ease;
-
+  border-bottom: 1px solid var(--accent-color2)
 }
 .menu-li:hover {
   font-weight: bold;
 }
 .menu-a {
-  color: var(--accent-color);
+  color: var(--background);
+  font-size: 2.5vw;
 }
 .menu-closed {
   max-height:0;
@@ -167,6 +167,11 @@ body, .app {
   font-family: 'Montserrat', sans-serif;
   background: var(--accent-color);
   text-align: center;
+  position: fixed;
+  width: 100%;
+  height: 65px;
+  z-index: 6;
+  top: 0;
 }
 .list-books-title h1 {
   font-weight: 400;
@@ -175,6 +180,7 @@ body, .app {
 }
 
 .list-books-content {
+  margin: 80px 6% 0 6%;
   padding: 0 0 80px;
   flex: 1;
 }
@@ -216,22 +222,26 @@ body, .app {
 }
 
 /* search page */
-
-#updateMessage {
+.message-container {
   position: fixed;
+  z-index: 10;
+  top: 120px;
   width: 100%;
-  z-index: 100;
+  justify-content: center;
+  display: none;
+}
+#updateMessage {
+  width: 50%;
   text-align: center;
   color: var(--background);
   background: var(--main-color);
-  top: 50px;
-  display: none;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .search-books-bar {
   position: fixed;
   width: 100%;
-  top: 0;
+  top: 65px;
   left: 0;
   z-index: 5;
   display: flex;
@@ -266,12 +276,15 @@ body, .app {
 
 .result-info {
   position:relative;
-  top: 70px;
+  width: 100%;
+  height: 25px;
+  top: 135px;
   left: 15px;
   color: var(--main-color);
 }
 
 .search-books-results {
+  margin-top: 65px;
   padding: 80px 10px 20px;
 }
 
@@ -303,8 +316,15 @@ body, .app {
 }
 .book-authors {
   color: var(--main-color);
+  width: 100%;
 }
-
+.book-authors li {
+  width: 100%;
+  padding: 0;
+}
+.authors-list {
+    padding: 0;
+}
 .book-top {
   position: relative;
   height: 200px;
@@ -344,3 +364,4 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+

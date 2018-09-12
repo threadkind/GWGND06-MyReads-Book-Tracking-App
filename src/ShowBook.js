@@ -38,7 +38,13 @@ class ShowBook extends React.Component {
 	            </div>
 	          </div>
 	          <div className="book-title">{this.props.title}</div>
-	          <div className="book-authors">{this.props.authors}</div>
+	          <div className="book-authors">
+	          	<ol className="authors-list">
+	          		{this.props.authors.map(author =>
+	          			<li>{author}</li>
+	          		)}
+	          	</ol>
+	          </div>
 	        </div>
 	      </li>
 
