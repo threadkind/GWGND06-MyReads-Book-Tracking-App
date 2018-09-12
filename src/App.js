@@ -34,9 +34,8 @@ class BooksApp extends React.Component {
 
   }
 
-  handler() {
+  shelfHandler() {
     this.filterBooks()
-    console.log('app handled')
   }
 
   menuClick = () => {
@@ -64,6 +63,20 @@ class BooksApp extends React.Component {
     }
   componentDidMount() {
     this.filterBooks()
+
+    document.querySelector('.book-description-close').addEventListener('click', function(){
+
+
+      document.querySelector('.book-description-container').style.display = 'none'
+
+    })
+
+    document.querySelector('.app').addEventListener('click', function(e){
+      if(e.target.className === 'book-cover'){
+        document.querySelector('.book-description-container').style.display = 'flex'
+      }
+      console.log(e)
+    })
   }
 
   render() {
@@ -75,11 +88,15 @@ class BooksApp extends React.Component {
         <div className="list-books-title">
           <h1>MyReads</h1>
         </div>
+        <div className="book-description-container">
+          <div className="book-description">
+            <div className="book-description-close">x</div>
+          </div>
+        </div>
 
       {/* M A I N    A P P    R E N D E R I N G */}
         <Route exact path="/" render={() => (
           <div>
-
           <div className="list-books">
 
 
@@ -102,7 +119,8 @@ class BooksApp extends React.Component {
                 title={book.title}
                 authors={book.authors}
                 rating={book.averageRating}
-                handler={(this.handler).bind(this)}
+                description={book.description}
+                shelfHandler={(this.shelfHandler).bind(this)}
               />
         )}
 
@@ -126,7 +144,8 @@ class BooksApp extends React.Component {
                 title={book.title}
                 authors={book.authors}
                 rating={book.averageRating}
-                handler={(this.handler).bind(this)}
+                description={book.description}
+                shelfHandler={(this.shelfHandler).bind(this)}
               />
         )}
           </ol>
@@ -149,7 +168,8 @@ class BooksApp extends React.Component {
                 title={book.title}
                 authors={book.authors}
                 rating={book.averageRating}
-                handler={(this.handler).bind(this)}
+                description={book.description}
+                shelfHandler={(this.shelfHandler).bind(this)}
               />
         )}
           </ol>
@@ -175,7 +195,6 @@ class BooksApp extends React.Component {
       /> {/* End of main route*/}
 
       {/* S E A R C H    P A G E    R E N D E R I N G */}
-      {/* C U R R E N T L Y    R E A D I N G    P A G E    R E N D E R I N G */}
 
         <Route exact path="/currently-reading" render={() => (
           <div>
@@ -195,7 +214,8 @@ class BooksApp extends React.Component {
                           title={book.title}
                           authors={book.authors}
                           rating={book.averageRating}
-                          handler={(this.handler).bind(this)}
+                          description={book.description}
+                          shelfHandler={(this.shelfHandler).bind(this)}
                         />
                       )}
                     </ol>
@@ -230,7 +250,8 @@ class BooksApp extends React.Component {
                           title={book.title}
                           authors={book.authors}
                           rating={book.averageRating}
-                          handler={(this.handler).bind(this)}
+                          description={book.description}
+                          shelfHandler={(this.shelfHandler).bind(this)}
                         />
                       )}
                     </ol>
@@ -265,7 +286,8 @@ class BooksApp extends React.Component {
                           title={book.title}
                           authors={book.authors}
                           rating={book.averageRating}
-                          handler={(this.handler).bind(this)}
+                          description={book.description}
+                          shelfHandler={(this.shelfHandler).bind(this)}
                         />
                       )}
                     </ol>
@@ -292,7 +314,7 @@ class BooksApp extends React.Component {
             currentlyReading={this.state.currentlyReading}
             wantToRead={this.state.wantToRead}
             read={this.state.read}
-            refreshBookshelves={(this.handler).bind(this)}
+            refreshBookshelves={(this.shelfHandler).bind(this)}
           />
           </div>
         )} /> {/* End of search route*/}

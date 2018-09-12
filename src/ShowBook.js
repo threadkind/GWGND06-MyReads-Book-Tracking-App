@@ -1,6 +1,7 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 
+
 class ShowBook extends React.Component {
 	state = {
 		shelf : this.props.shelf || 'none',
@@ -11,7 +12,7 @@ class ShowBook extends React.Component {
 
 		BooksAPI.update(event.target, event.target.value)
 		.then((e) => {
-			this.props.handler()
+			this.props.shelfHandler()
 			console.log('book handled')
 		})
 	}

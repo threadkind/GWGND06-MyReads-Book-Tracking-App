@@ -22,28 +22,28 @@ class Menu extends React.Component {
 			  <li className="menu-li menu-closed">
 			    <Link to="/"
 			          className="menu-a"
-			          onClick={this.menuClick}
+			          onClick={this.props.menuClick}
 			        >All Bookshelves
 			    </Link>
 			  </li>
 			  <li className="menu-li menu-closed">
 			    <Link to="/currently-reading"
 			          className="menu-a"
-			          onClick={this.menuClick}
+			          onClick={this.props.menuClick}
 			        >Currently Reading
 			    </Link>
 			  </li>
 			  <li className="menu-li menu-closed">
 			    <Link to="/want-to-read"
 			          className="menu-a"
-			          onClick={this.menuClick}
+			          onClick={this.props.menuClick}
 			        >Want To Read
 			    </Link>
 			  </li>
 			  <li className="menu-li menu-closed">
 			    <Link to="/read"
 			          className="menu-a"
-			          onClick={this.menuClick}
+			          onClick={this.props.menuClick}
 			      >Read
 			    </Link>
 			  </li>
