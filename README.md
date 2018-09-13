@@ -74,6 +74,7 @@ The backend API uses a fixed set of cached search results and is limited to a pa
 
 ## Dependancies
 This app is written primarily in React with HTML, CSS, Javascript(JSX).
+[React Router](https://reacttraining.com/react-router/) is used to help with routing in the app.
 The app starter code, including the backend server, was provided by Udacity as part of the Grow With Google Nanodegree program.
 The starter code can be found at [github](https://github.com/udacity/reactnd-project-myreads-starter).
 

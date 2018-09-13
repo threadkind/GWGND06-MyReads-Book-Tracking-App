@@ -28,7 +28,6 @@ class BooksApp extends React.Component {
         wantToRead : wantToRead,
         read : read,
       })
-      console.log(this.state)
       }
     )
   }
