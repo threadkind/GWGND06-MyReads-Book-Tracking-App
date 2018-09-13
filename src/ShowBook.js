@@ -6,12 +6,6 @@ class ShowBook extends React.Component {
 	state = {
 		shelf : this.props.shelf || 'none',
 		rating : '',
-		description : this.props.description
-	}
-
-	handleBookClick = (e) => {
-			console.log(this.state)
-			console.log(this.props)
 	}
 
 	changeShelf = (event) => {
@@ -19,11 +13,10 @@ class ShowBook extends React.Component {
 		BooksAPI.update(event.target, event.target.value)
 		.then((e) => {
 			this.props.shelfHandler()
-			console.log('book handled')
 		})
 	}
 
-	componentDidMount() {
+	setStarRating =() => {
 		let rating;
 		let star = '★'
 
@@ -49,6 +42,10 @@ class ShowBook extends React.Component {
 		this.setState({ rating })
 	}
 
+	componentDidMount() {
+	  this.setStarRating()
+	  console.log(this.state)
+	}
 	render() {
 	  return (
 
