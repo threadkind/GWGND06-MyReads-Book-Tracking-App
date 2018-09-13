@@ -44,7 +44,6 @@ class ShowBook extends React.Component {
 
 	componentDidMount() {
 	  this.setStarRating()
-	  console.log(this.state)
 	}
 	render() {
 	  return (
