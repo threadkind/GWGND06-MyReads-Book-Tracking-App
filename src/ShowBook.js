@@ -11,6 +11,7 @@ class ShowBook extends React.Component {
 	}
 
 	changeShelf = (event) => {
+		this.setState({ shelf : event.target.value })
 
 		BooksAPI.update(event.target, event.target.value)
 		.then((e) => {
