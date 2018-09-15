@@ -14,7 +14,6 @@ class ShowBook extends React.Component {
 
 		BooksAPI.update(event.target, event.target.value)
 		.then((e) => {
-			console.log(event.target, event.target.value)
 			this.props.shelfHandler()
 		})
 	}
@@ -49,14 +48,14 @@ class ShowBook extends React.Component {
 	  this.setStarRating()
 
 	  if (this.props.authors === undefined){
-	  	this.state.authors = ['Author Unknown']
+	  	this.setState({ authors : ['Author Unknown'] })
 	  }
-	  else { this.state.authors = this.props.authors }
+	  else { this.setState({ authors : this.props.authors}) }
 
 	  if (this.props.thumbnail === undefined){
-	  	this.state.thumbnail = 'images/art-unavailable'
+	  	this.setState({ thumbnail : 'images/art-unavailable' })
 	  }
-	  else { this.state.thumbnail = this.props.thumbnail}
+	  else { this.setState({ thumbnail : this.props.thumbnail }) }
 
 
 	}

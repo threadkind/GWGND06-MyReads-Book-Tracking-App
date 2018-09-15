@@ -41,14 +41,29 @@ class Search extends React.Component {
   updateQuery = (query) => {
     this.setState({ query })
 
+
+    if(query.length === 0) {
+        document.querySelector('.books-grid').innerHTML = ''
+      }
+
+    else {
+
     BooksAPI.search(query)
     .then( search => {
 
-      if(search === undefined) {
-        document.querySelector('.books-grid').innerHTML = ''
+      if(search.length > 0 ){
+
+          this.setState({ search : search })
       }
-      else if(search.length > 0 ){
-        let authorCheck = search.map( book => {
+      else {
+        this.setState({ search : [] })
+      }
+    })
+    .catch(err => console.log(err))
+    }
+
+
+{/*        let authorCheck = search.map( book => {
           if(book.authors === undefined ){
             book.authors = ['Author Unknown']
             return book
@@ -65,14 +80,8 @@ class Search extends React.Component {
           else { return book }
           })
 
+*/}
 
-          this.setState({ search : imageCheck })
-      }
-      else {
-        this.setState({ search : [] })
-      }
-    })
-    .catch(err => console.log(err))
 
 
     {/*const match = query.toLowerCase().split(' ').map( word => {
