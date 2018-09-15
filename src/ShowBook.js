@@ -6,12 +6,15 @@ class ShowBook extends React.Component {
 	state = {
 		shelf : this.props.shelf || 'none',
 		rating : '',
+		authors : [],
+		thumbnail : ''
 	}
 
 	changeShelf = (event) => {
 
 		BooksAPI.update(event.target, event.target.value)
 		.then((e) => {
+			console.log(event.target, event.target.value)
 			this.props.shelfHandler()
 		})
 	}
@@ -44,6 +47,18 @@ class ShowBook extends React.Component {
 
 	componentDidMount() {
 	  this.setStarRating()
+
+	  if (this.props.authors === undefined){
+	  	this.state.authors = ['Author Unknown']
+	  }
+	  else { this.state.authors = this.props.authors }
+
+	  if (this.props.thumbnail === undefined){
+	  	this.state.thumbnail = 'images/art-unavailable'
+	  }
+	  else { this.state.thumbnail = this.props.thumbnail}
+
+
 	}
 	render() {
 	  return (
@@ -53,7 +68,7 @@ class ShowBook extends React.Component {
 	          <div className="book-top">
 	            <div className="book-cover"
 	            	 id={`cover-${this.props.id}`}
-	                 style={{ width: 128, height: 193, backgroundImage: `url(${this.props.thumbnail})`}}
+	                 style={{ width: 128, height: 193, backgroundImage: `url(${this.state.thumbnail})`}}
 	                 onClick={this.handleBookClick}>
 	            </div>
 	            <div className="book-shelf-changer">
@@ -75,8 +90,8 @@ class ShowBook extends React.Component {
 	          <div className="book-title">{this.props.title}</div>
 	          <div className="book-authors">
 	          	<ol className="authors-list">
-	          		{this.props.authors.map((author, index) =>
-	          			<li key={index}>{author}</li>
+	          		{this.state.authors.map((author, index) =>
+	          			<li key={index}>{author || 'Author Unknown'}</li>
 	          		)}
 	          	</ol>
 	          </div>
