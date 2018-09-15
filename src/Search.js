@@ -7,7 +7,7 @@ class Search extends React.Component {
   state = {
     query: '',
     search: [],
-    searchTerms: ['Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus', 'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production', 'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling', 'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming', 'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual Reality', 'Web Development', 'iOS']
+    searchTerms: ['Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus', 'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production', 'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling', 'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming', 'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual Reality', 'Web Development', 'iOS'],
   }
 
   shelfHandler(e) {
@@ -41,10 +41,44 @@ class Search extends React.Component {
   updateQuery = (query) => {
     this.setState({ query })
 
-    const match = query.toLowerCase().split(' ').map( word => {
-      return word.charAt(0).toUpperCase() + word.substr(1)
-    }).join(" ")
+    BooksAPI.search(query)
+    .then( search => {
 
+      if(search === undefined) {
+        document.querySelector('.books-grid').innerHTML = ''
+      }
+      else if(search.length > 0 ){
+        let authorCheck = search.map( book => {
+          if(book.authors === undefined ){
+            book.authors = ['Author Unknown']
+            return book
+          }
+          else { return book }
+        })
+
+        let imageCheck = authorCheck.map( book => {
+          if(book.imageLinks === undefined){
+              book.imageLinks = {}
+              book.imageLinks.thumbnail = 'images/art-unavailable'
+              return book
+            }
+          else { return book }
+          })
+
+
+          this.setState({ search : imageCheck })
+      }
+      else {
+        this.setState({ search : [] })
+      }
+    })
+    .catch(err => console.log(err))
+
+
+    {/*const match = query.toLowerCase().split(' ').map( word => {
+      return word.charAt(0).toUpperCase() + word.substr(1)
+    }).join(" ")*/}
+    {/*
     if (this.state.searchTerms.includes(match)){
       BooksAPI.search(query)
       .then((search) => {
@@ -84,8 +118,11 @@ class Search extends React.Component {
     }
     else {
       this.setState({ search : [] })
-    }
+    }*/}
   }
+
+
+
 
   render() {
     return(
@@ -123,7 +160,7 @@ class Search extends React.Component {
         <div className="search-books-results">
           <ol className="books-grid">
 
-          {this.state.search.map( (book, index) =>
+          {this.state.search.length >=0 && this.state.search.map( (book, index) =>
             <ShowBook
               key={book.id}
               id={book.id}
