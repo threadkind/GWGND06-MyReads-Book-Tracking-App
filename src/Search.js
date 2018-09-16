@@ -42,11 +42,7 @@ class Search extends React.Component {
     this.setState({ query })
 
 
-    if(query.length === 0) {
-        document.querySelector('.books-grid').innerHTML = ''
-      }
 
-    else {
 
     BooksAPI.search(query)
     .then( search => {
@@ -60,7 +56,7 @@ class Search extends React.Component {
       }
     })
     .catch(err => console.log(err))
-    }
+
 
 
 {/*        let authorCheck = search.map( book => {
@@ -169,11 +165,11 @@ class Search extends React.Component {
         <div className="search-books-results">
           <ol className="books-grid">
 
-          {this.state.search.length >=0 && this.state.search.map( (book, index) =>
+          {this.state.query.length > 0 && this.state.search.map( (book, index) =>
             <ShowBook
               key={book.id}
               id={book.id}
-              thumbnail={book.imageLinks.thumbnail}
+              thumbnail={ book.imageLinks }
               shelf={book.shelf}
               title={book.title}
               authors={book.authors}

@@ -11,12 +11,12 @@ class ShowBook extends React.Component {
 	}
 
 	changeShelf = (event) => {
-		this.setState({ shelf : event.target.value })
 
 		BooksAPI.update(event.target, event.target.value)
 		.then((e) => {
 			this.props.shelfHandler()
-		})
+		}).then(this.setState({ shelf : event.target.value })
+)
 	}
 
 	setStarRating =() => {
@@ -69,7 +69,7 @@ class ShowBook extends React.Component {
 	            <div className="book-cover"
 	            	 id={`cover-${this.props.id}`}
 	                 style={{ width: 128, height: 193, backgroundImage: `url(${this.state.thumbnail})`}}
-	                 onClick={this.handleBookClick}>
+	                 >
 	            </div>
 	            <div className="book-shelf-changer">
 	              <select
