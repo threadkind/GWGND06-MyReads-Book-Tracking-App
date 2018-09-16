@@ -130,6 +130,7 @@ class Search extends React.Component {
 
 
   render() {
+    console.log(this.state)
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -169,7 +170,7 @@ class Search extends React.Component {
             <ShowBook
               key={book.id}
               id={book.id}
-              thumbnail={ book.imageLinks }
+              thumbnail={ book.imageLinks.thumbnail }
               shelf={book.shelf}
               title={book.title}
               authors={book.authors}
