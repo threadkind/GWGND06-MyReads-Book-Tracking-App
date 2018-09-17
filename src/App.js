@@ -44,7 +44,12 @@ class BooksApp extends React.Component {
 
       BooksAPI.get(id)
         .then(results => {
-        document.querySelector('.book-description-text').innerText = results.description
+          if(results.description === undefined){
+            document.querySelector('.book-description-text').innerText = 'Description not available'
+          }
+          else {
+            document.querySelector('.book-description-text').innerText = results.description
+          }
           }
         )
     }

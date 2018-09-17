@@ -54,7 +54,7 @@ class ShowBook extends React.Component {
 	  else { this.setState({ authors : this.props.authors}) }
 
 	  if (this.props.thumbnail === undefined){
-	  	this.setState({ thumbnail : 'images/art-unavailable' })
+	  	this.setState({ thumbnail : '/images/art-unavailable.jpeg' })
 	  }
 	  else { this.setState({ thumbnail : this.props.thumbnail }) }
 

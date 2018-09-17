@@ -50,7 +50,7 @@ class Search extends React.Component {
       if(search.length > 0 ){
         let thumbSearch = search.map(book => {
           if (book.imageLinks === undefined){
-            book.imageLinks = {thumbnail : 'images/art-unavailable'}
+            book.imageLinks = {thumbnail : '/images/art-unavailable.jpeg'}
             return book
           }
           else { return book }
