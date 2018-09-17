@@ -41,22 +41,12 @@ class Search extends React.Component {
   updateQuery = (query) => {
     this.setState({ query })
 
-
-
-
     BooksAPI.search(query)
     .then( search => {
 
       if(search.length > 0 ){
-        let thumbSearch = search.map(book => {
-          if (book.imageLinks === undefined){
-            book.imageLinks = {thumbnail : '/images/art-unavailable.jpeg'}
-            return book
-          }
-          else { return book }
-        })
 
-        this.setState({ search : thumbSearch })
+        this.setState({ search : search })
       }
       else {
         this.setState({ search : [] })
@@ -65,9 +55,6 @@ class Search extends React.Component {
     .catch(err => console.log(err))
 
   }
-
-
-
 
   render() {
     console.log(this.state)
@@ -110,7 +97,7 @@ class Search extends React.Component {
             <ShowBook
               key={book.id}
               id={book.id}
-              thumbnail={ book.imageLinks.thumbnail }
+              thumbnail={ book.imageLinks }
               shelf={book.shelf}
               title={book.title}
               authors={book.authors}

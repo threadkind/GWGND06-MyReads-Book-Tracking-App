@@ -11,6 +11,7 @@ class ShowBook extends React.Component {
 	}
 
 	changeShelf = (event) => {
+		console.log(event		)
 
 		BooksAPI.update(event.target, event.target.value)
 		.then((e) => {
@@ -56,7 +57,7 @@ class ShowBook extends React.Component {
 	  if (this.props.thumbnail === undefined){
 	  	this.setState({ thumbnail : '/images/art-unavailable.jpeg' })
 	  }
-	  else { this.setState({ thumbnail : this.props.thumbnail }) }
+	  else { this.setState({ thumbnail : this.props.thumbnail.thumbnail }) }
 
 
 	}

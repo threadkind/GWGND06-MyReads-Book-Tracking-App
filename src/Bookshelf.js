@@ -12,7 +12,10 @@ class Bookshelf extends React.Component {
 	filterShelf() {
 	  BooksAPI.getAll()
 		.then(books => books.filter(book => book.shelf === this.props.shelf))
-		.then(results => this.setState({ books : results }))
+		.then(results =>
+
+			this.setState({ books : results })
+		)
 	}
 
 	componentDidMount() {
@@ -38,7 +41,7 @@ class Bookshelf extends React.Component {
                 <ShowBook
                   key={book.id}
                   id={book.id}
-                  thumbnail={book.imageLinks.thumbnail}
+                  thumbnail={book.imageLinks}
                   shelf={book.shelf}
                   title={book.title}
                   authors={book.authors}
