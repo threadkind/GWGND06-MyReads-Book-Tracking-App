@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import Menu from './Menu'
-import ShowBook from './ShowBook'
+import Bookshelf from './Bookshelf'
 import Search from './Search'
 import './App.css'
 
@@ -119,68 +119,23 @@ class BooksApp extends React.Component {
               <div className="list-books-content">
                 <div>
 
-                  <div className="bookshelf">
-                    <h2 className="bookshelf-title">Currently Reading</h2>
-                    <div className="bookshelf-books">
-                      <ol className="books-grid">
-                        {this.state.currentlyReading.map( (book, index) =>
-                        <ShowBook
-                          key={book.id}
-                          id={book.id}
-                          thumbnail={book.imageLinks.thumbnail}
-                          shelf={book.shelf}
-                          title={book.title}
-                          authors={book.authors}
-                          rating={book.averageRating}
-                          shelfHandler={(this.shelfHandler).bind(this)}
-                        />
-                        )}
-                      </ol>
-                    </div>
-                  </div>
+                  <Bookshelf
+                    shelfTitle="Currently Reading"
+                    shelf="currentlyReading"
+                    refreshShelves={(this.filterBooks).bind(this)}
+                   />
 
-                  <div className="bookshelf">
-                    <h2 className="bookshelf-title">Want To Read</h2>
-                    <div className="bookshelf-books">
-                      <ol className="books-grid">
-                      {this.state.wantToRead.map( (book, index) =>
-                        <ShowBook
-                          key={index}
-                          id={book.id}
-                          thumbnail={book.imageLinks.thumbnail}
-                          shelf={book.shelf}
-                          title={book.title}
-                          authors={book.authors}
-                          rating={book.averageRating}
-                          shelfHandler={(this.shelfHandler).bind(this)}
-                          descriptionHandler={( this.descriptionHandler)}
+                  <Bookshelf
+                    shelfTitle="Want To Read"
+                    shelf="wantToRead"
+                    refreshShelves={(this.filterBooks).bind(this)}
+                   />
 
-                        />
-                      )}
-                    </ol>
-                  </div>
-                </div>
-
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                    {this.state.read.map( (book, index) =>
-                      <ShowBook
-                        key={index}
-                        id={book.id}
-                        thumbnail={book.imageLinks.thumbnail}
-                        shelf={book.shelf}
-                        title={book.title}
-                        authors={book.authors}
-                        rating={book.averageRating}
-                        shelfHandler={(this.shelfHandler).bind(this)}
-                        descriptionHandler={( this.descriptionHandler)}
-                      />
-                    )}
-                  </ol>
-                </div>
-              </div>
+                  <Bookshelf
+                    shelfTitle="Read"
+                    shelf="read"
+                    refreshShelves={(this.filterBooks).bind(this)}
+                   />
 
             </div>
           </div>
@@ -203,28 +158,11 @@ class BooksApp extends React.Component {
         <div>
           <div className="list-books">
             <div className="list-books-content">
-              <div className="bookshelf">
-                <h2 className="bookshelf-title">Currently Reading</h2>
-                <div className="bookshelf-books">
-
-                  <ol className="books-grid">
-                  {this.state.currentlyReading.map( (book, index) =>
-                    <ShowBook
-                      key={book.id}
-                      id={book.id}
-                      thumbnail={book.imageLinks.thumbnail}
-                      shelf={book.shelf}
-                      title={book.title}
-                      authors={book.authors}
-                      rating={book.averageRating}
-                      shelfHandler={(this.shelfHandler).bind(this)}
-                      descriptionHandler={( this.descriptionHandler)}
-
-                    />
-                  )}
-                </ol>
-              </div>
-            </div>
+              <Bookshelf
+                shelfTitle="Currently Reading"
+                shelf="currentlyReading"
+                refreshShelves={(this.filterBooks).bind(this)}
+               />
           </div>
 
           <div className="open-search">
@@ -239,75 +177,45 @@ class BooksApp extends React.Component {
 
       {/* W A N T   T O   R E A D    P A G E    R E N D E R I N G */}
         <Route exact path="/want-to-read" render={() => (
-          <div>
-            <div className="list-books">
-              <div className="list-books-content">
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Want To Read</h2>
-                  <div className="bookshelf-books">
-
-                    <ol className="books-grid">
-                    {this.state.wantToRead.map( (book, index) =>
-                      <ShowBook
-                        key={book.id}
-                        id={book.id}
-                        thumbnail={book.imageLinks.thumbnail}
-                        shelf={book.shelf}
-                        title={book.title}
-                        authors={book.authors}
-                        rating={book.averageRating}
-                        shelfHandler={(this.shelfHandler).bind(this)}
-                      />
-                    )}
-                    </ol>
-                  </div>
-                </div>
-              </div>
-
-              <div className="open-search">
-                <Link
-                  to="/search"
-                >Add a book</Link>
-              </div>
-            </div>
+        <div>
+          <div className="list-books">
+            <div className="list-books-content">
+              <Bookshelf
+                shelfTitle="Want To Read"
+                shelf="wantToRead"
+                refreshShelves={(this.filterBooks).bind(this)}
+               />
           </div>
+
+          <div className="open-search">
+            <Link
+              to="/search"
+            >Add a book</Link>
+          </div>
+        </div>
+      </div>
         )} />
 
 
       {/* R E A D    P A G E    R E N D E R I N G */}
         <Route exact path="/read" render={() => (
-          <div>
-            <div className="list-books">
-              <div className="list-books-content">
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                  <div className="bookshelf-books">
-
-                    <ol className="books-grid">
-                    {this.state.read.map( (book, index) =>
-                      <ShowBook
-                        key={book.id}
-                        id={book.id}
-                        thumbnail={book.imageLinks.thumbnail}
-                        shelf={book.shelf}
-                        title={book.title}
-                        authors={book.authors}
-                        rating={book.averageRating}
-                        shelfHandler={(this.shelfHandler).bind(this)}
-                      />
-                    )}
-                    </ol>
-                  </div>
-                </div>
-              </div>
-
-              <div className="open-search">
-                <Link
-                  to="/search"
-                >Add a book</Link>
-              </div>
-            </div>
+        <div>
+          <div className="list-books">
+            <div className="list-books-content">
+              <Bookshelf
+                shelfTitle="Read"
+                shelf="read"
+                refreshShelves={(this.filterBooks).bind(this)}
+               />
           </div>
+
+          <div className="open-search">
+            <Link
+              to="/search"
+            >Add a book</Link>
+          </div>
+        </div>
+      </div>
         )} />
 
 
