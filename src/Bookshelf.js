@@ -18,6 +18,7 @@ class Bookshelf extends React.Component {
 	componentDidMount() {
 		this.filterShelf()
 	}
+
 	componentWillReceiveProps() {
 		this.filterShelf()
 	}

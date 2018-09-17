@@ -90,6 +90,12 @@ class BooksApp extends React.Component {
   }
 
   render() {
+    const shelves = {
+      currentlyReading: ['Currently Reading', 'currentlyReading'],
+      wantToRead: ['Want to Read', 'wantToRead'],
+      read: ['Read', 'read']
+    }
+
 
     return (
       <div className="app"
@@ -119,23 +125,15 @@ class BooksApp extends React.Component {
               <div className="list-books-content">
                 <div>
 
-                  <Bookshelf
-                    shelfTitle="Currently Reading"
-                    shelf="currentlyReading"
-                    refreshShelves={(this.filterBooks).bind(this)}
-                   />
+                  { Object.keys(shelves).map(shelf =>
 
                   <Bookshelf
-                    shelfTitle="Want To Read"
-                    shelf="wantToRead"
+                    key={shelves[shelf][1]}
+                    shelfTitle={shelves[shelf][0]}
+                    shelf={shelves[shelf][1]}
                     refreshShelves={(this.filterBooks).bind(this)}
                    />
-
-                  <Bookshelf
-                    shelfTitle="Read"
-                    shelf="read"
-                    refreshShelves={(this.filterBooks).bind(this)}
-                   />
+                  )}
 
             </div>
           </div>
