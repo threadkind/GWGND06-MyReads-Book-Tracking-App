@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {debounce} from 'throttle-debounce';
 import * as BooksAPI from './BooksAPI'
 import ShowBook from './ShowBook'
 
@@ -8,7 +7,6 @@ class Search extends React.Component {
   state = {
     query: '',
     search: [],
-    searchTerms: ['Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus', 'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production', 'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling', 'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming', 'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual Reality', 'Web Development', 'iOS'],
   }
 
   shelfHandler(e) {
@@ -40,14 +38,24 @@ class Search extends React.Component {
   }
 
   updateQuery = (query) => {
+    let booksOnShelves = (this.props.currentlyReading.concat(this.props.wantToRead).concat(this.props.read))
+    let booksOnShelvesId = (this.props.currentlyReading.concat(this.props.wantToRead).concat(this.props.read)).map(book => book.id)
+
     this.setState({ query })
 
     BooksAPI.search(query)
     .then( search => {
-
       if(search.length > 0 ){
+        search.map(book => {
+          if(booksOnShelvesId.includes(book.id)){
+            book.shelf = booksOnShelves[booksOnShelvesId.indexOf(book.id)].shelf
+            return book
+          }
+          else { return book }
+        })
 
         this.setState({ search : search })
+
       }
       else {
         this.setState({ search : [] })
@@ -57,8 +65,8 @@ class Search extends React.Component {
 
   }
 
+
   render() {
-    console.log(this.state)
     return(
       <div className="search-books">
         <div className="search-books-bar">

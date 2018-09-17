@@ -3,7 +3,6 @@ import * as BooksAPI from './BooksAPI'
 import ShowBook from './ShowBook'
 
 
-
 class Bookshelf extends React.Component {
 	state = {
 		books : []
@@ -13,7 +12,6 @@ class Bookshelf extends React.Component {
 	  BooksAPI.getAll()
 		.then(books => books.filter(book => book.shelf === this.props.shelf))
 		.then(results =>
-
 			this.setState({ books : results })
 		)
 	}
@@ -36,20 +34,20 @@ class Bookshelf extends React.Component {
 	      <div className="bookshelf">
             <h2 className="bookshelf-title">{this.props.shelfTitle}</h2>
             <div className="bookshelf-books">
-              <ol className="books-grid">
-                {this.state.books.map( (book, index) =>
-                <ShowBook
-                  key={book.id}
-                  id={book.id}
-                  thumbnail={book.imageLinks}
-                  shelf={book.shelf}
-                  title={book.title}
-                  authors={book.authors}
-                  rating={book.averageRating}
-                  shelfHandler={(this.shelfHandler).bind(this)}
-                />
-                )}
-              </ol>
+	              <ol className="books-grid">
+	                {this.state.books.map( (book, index) =>
+	                <ShowBook
+	                  key={book.id}
+	                  id={book.id}
+	                  thumbnail={book.imageLinks}
+	                  shelf={book.shelf}
+	                  title={book.title}
+	                  authors={book.authors}
+	                  rating={book.averageRating}
+	                  shelfHandler={(this.shelfHandler).bind(this)}
+	                />
+	                )}
+	              </ol>
             </div>
           </div>
 
