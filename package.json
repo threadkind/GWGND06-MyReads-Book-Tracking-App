@@ -1,4 +1,8 @@
 {
+  "name": "book-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://portfolio.threadkind.com/GWGND06-MyReads-Book-Tracking-App",
   "dependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
